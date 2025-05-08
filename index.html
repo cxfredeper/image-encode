@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Image thing</title>
+  <title>File to Image</title>
   <style>
     html {
       line-height: 1.5;
@@ -36,9 +36,9 @@
 <p>
 	Simple tool to encode arbitrary bytes to an image.
 	Will break for files larger than 2^32 - 1 bytes (~4 GB).
-	There's absolutely zero error correction
-	so this will also break on decode if the image gets recompressed.
-	(shrug)
+	The image can be decoded with the
+	<a href="https://cxfredeper.github.io/image-decode/">decode thingy</a>
+	to get back the original file.
 
 <h2>Choose your file</h2>
 <input type="file" id="in"></input>
