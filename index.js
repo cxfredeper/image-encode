@@ -16,6 +16,8 @@ async function generateImage() {
 
 
 function setImage(data) {
+	document.getElementById("out-header").style.display = "inherit";
+
 	let out = document.getElementById("out");
 	out.src = URL.createObjectURL(new Blob([data]));
 }
@@ -44,12 +46,7 @@ function encodeImage(payload) {
 	const headerLength = 4;
 	let paddingLength = (width * width) * 4 - headerLength - payload.length;
 
-	console.debug(`header: ${headerLength}`);
-	console.debug(`payload: ${payload.length}`);
-	console.debug(`padding: ${paddingLength}`);
-
 	let data = new Uint8ClampedArray(headerLength + payload.length + paddingLength);
-	console.debug(`package: ${data.length + paddingLength}`);
 
 	writeHeader(data, payload);
 	data.set(payload, headerLength)
