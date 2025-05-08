@@ -1,1 +1,53 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Image thing</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: sans-serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+  </style>
+  <script type="module">
+    import UPNG from "https://cdn.skypack.dev/upng-js@2.1.0"; window.UPNG = UPNG;
+  </script>
+  <script src="index.js"></script>
+</head>
+<body>
+<h1>File to image encode thingy</h1>
+<p>
+	Simple tool to encode arbitrary bytes to an image.
+	Will break for files larger than 2^32 - 1 bytes (~4 GB).
+	There's absolutely zero error correction
+	so this will also break on decode if the image gets recompressed.
+	(shrug)
+
+<h2>Choose your file</h2>
+<input type="file" id="in"></input>
+
+<h2>Encode</h2>
+<input type="button" value="encode" onclick="generateImage();" />
+
+<h2>Here's your image</h2>
+<canvas style="display: none;" id="canvas" width="0" height="0"></canvas>
+<img id="out"></img>
+</body>
+</html>
