@@ -4,12 +4,12 @@ from math import sqrt, ceil
 
 
 def parse_header(data):
-	return int.from_bytes(data[:3])
+	return int.from_bytes(data[:4])
 
 
 def decode_image(img):
 	package = img.tobytes()
-	return package[3:parse_header(package)]
+	return package[4:(4 + parse_header(package))]
 
 
 if __name__ == "__main__":

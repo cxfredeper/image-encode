@@ -8,26 +8,31 @@ def prepare_header(data):
 	a = 0xff & l
 	b = 0xff & (l >> 8)
 	c = 0xff & (l >> 16)
-	return bytes([c, b, a])
+	d = 0xff & (l >> 24)
+	return bytes([d, c, b, a])
 
 
 def pad_suffix(data, length, val=b'\x00'):
 	pad_len = length - len(data)
 	if pad_len <= 0:
 		return b''
-	return val * length
+	return val * pad_len
 
 
 def encode_image(data):
-	if len(data) > 2**24:
+	if len(data) >= 2**32:
 		raise RuntimeError
 
-	width = ceil(sqrt(1 + len(data) / 3))
+	width = ceil(sqrt(1 + len(data) / 4))
 
 	header = prepare_header(data)
-	padding = pad_suffix(data, width * width * 3)
+	padding = pad_suffix(data, (width * width - 1) * 4)
+	print(f"header: {len(header)}")
+	print(f"payload: {len(data)}")
+	print(f"padding: {len(padding)}")
 	package = b''.join([header, data, padding])
-	img = Image.frombuffer(mode="RGB", size=(width, width), data=package)
+	print(f"package: {len(package)}")
+	img = Image.frombuffer(mode="RGBA", size=(width, width), data=package)
 	return img
 
 
